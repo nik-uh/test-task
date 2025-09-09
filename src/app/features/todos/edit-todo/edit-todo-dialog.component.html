@@ -1,0 +1,41 @@
+<mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <mat-form-field>
+      <mat-label>Текст задачи</mat-label>
+      <input matInput formControlName="title">
+      <mat-error *ngIf="form.get('title')?.hasError('required')">
+        Обязательное поле
+      </mat-error>
+      <mat-error *ngIf="form.get('title')?.hasError('minlength')">
+        Минимум 4 символа
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Автор задачи</mat-label>
+      <input matInput formControlName="userId">
+      <mat-error *ngIf="form.get('userId')?.hasError('required')">
+        Обязательное поле
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Статус задачи</mat-label>
+      <mat-select formControlName="completed">
+        <mat-option [value]="true">Да</mat-option>
+        <mat-option [value]="false">Нет</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('completed')?.hasError('required')">
+        Укажите статус
+      </mat-error>
+      <mat-error *ngIf="form.get('completed')?.hasError('invalidCompleted')">
+        Неверный статус
+      </mat-error>
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Сохранить</button>
+      <button mat-raised-button color="warn" (click)="dialogRef.close()">Отмена</button>
+    </div>
+  </form>
+</mat-dialog-content>
