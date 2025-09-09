@@ -1,0 +1,18 @@
+<div *ngIf="todo$ | async as todo; else loading" class="task-details-card">
+  <h2 class="task-title">📌 Задача: {{ todo.title }}</h2>
+
+  <div class="task-info">
+    <p><strong>👤 Автор:</strong> {{ todo.userId }}</p>
+    <p><strong>📎 Статус:</strong> {{ todo.completed ? '✅ Выполнена' : '❌ Не выполнена' }}</p>
+  </div>
+
+  <div class="task-actions">
+    <button routerLink="/tasks" mat-raised-button>
+      Назад
+    </button>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p class="loading">Загрузка...</p>
+</ng-template>
